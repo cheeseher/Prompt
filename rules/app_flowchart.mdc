@@ -1,0 +1,27 @@
+---
+description: Apply these rules when making changes to the project
+globs:
+alwaysApply: true
+---
+
+Update this rule if user requested changes to the project requirement, etc.
+flowchart TD
+    A[Start] --> B[Onboarding and Sign-In and Sign-Up]
+    B --> C[Main Dashboard]
+    C --> D[Quick Access: All, To be sorted, Sorted, Categories, Trash]
+    C --> E[7-Day Trend Chart]
+    C --> F[Swipe Manager]
+    F --> G[Delete Photo with Tinder-like Swipe]
+    G --> H[Log Operation in Git-like History]
+    F --> I[Automated Photo Tagging using Core ML and Vision]
+    I --> J[Review and Edit Tags]
+    C --> K[Memory Vault]
+    K --> L[Secure Compression with AES-256]
+    L --> M[iCloud Sync Option: Auto and Manual]
+    C --> N[Settings and Account Management]
+    N --> O[Localization and Customization Preferences]
+    C --> P[Device Specific Features]
+    P --> Q[Apple Watch: Quick Notifications and Tag Management]
+    P --> R[Vision Pro: Immersive AR Gallery]
+    H --> S[History View with Revert Options]
+    N --> T[Error States and Recovery Paths]

@@ -1,0 +1,149 @@
+---
+description: Apply these rules when making changes to the project
+globs:
+alwaysApply: true
+---
+
+Update this rule if user requested changes to the project requirement, etc.
+# Frontend Guideline Document for Keepin
+
+This document provides a comprehensive overview of the frontend architecture, design principles, and technologies used in the Keepin project. Keepin is an iOS mobile application designed for managing photo libraries through fun, secure, and intuitive interactions. The guidelines below ensure that anyone – from designers to developers – understands the frontend setup and overall approach.
+
+## Frontend Architecture
+
+Keepin uses Apple’s native SwiftUI framework to build a responsive, interactive, and modern user interface. The key points of the architecture include:
+
+*   **Framework & Libraries:**
+
+    *   **SwiftUI:** Leverages Apple’s system components for a consistent look-and-feel across devices.
+    *   **Core ML & Vision:** Integrated for offline automated photo tagging and background processing.
+    *   **Sign in with Apple:** Used for secure user authentication.
+
+*   **Scalability & Maintainability:**
+
+    *   Designed with a component-based structure that isolates functionality, making it easy to update and maintain specific parts of the application independently.
+    *   Adopts SwiftUI’s reactive programming model which promotes state-driven views and smoother UI updates.
+
+*   **Performance:**
+
+    *   Utilizes native iOS performance optimizations such as lazy loading of views, background tasks for non-critical operations (such as ML processing during sleep mode), and efficient integration with system services (e.g., iCloud and AES-256 encryption for data security).
+
+## Design Principles
+
+The design of Keepin emphasizes user experience, ease of use, and accessibility, following these core principles:
+
+*   **Usability:**
+
+    *   Intuitive interactions like swipe-to-delete, inspired by Tinder-like card swiping, ensure that managing photos is both quick and engaging.
+    *   A clear dashboard that summarizes key statistics and offers easy navigation through various tasks such as sorting, archiving, and viewing historical actions.
+
+*   **Accessibility:**
+
+    *   Adherence to Apple’s accessibility guidelines to ensure that text, buttons, and navigation elements are easily accessible to all users.
+    *   Thoughtful color contrasts and scalable typography thanks to the use of Apple's default San Francisco font.
+
+*   **Responsiveness:**
+
+    *   The application is built to perform smoothly on different Apple devices including iPhones, iPads, Apple Watch, and even Vision Pro for immersive AR experiences.
+    *   SwiftUI’s adaptive layouts ensure that the interface automatically adjusts to different screen sizes and orientations.
+
+## Styling and Theming
+
+The Keepin app adheres to a modern, minimalist aesthetic influenced by Apple’s design language. Below are the key styling aspects:
+
+*   **Styling Approach:**
+
+    *   Uses SwiftUI’s built-in styling capabilities along with system components like blur effects and native animations.
+    *   CSS methodologies (such as BEM) are not used here because the styling is done via SwiftUI’s declarative syntax.
+
+*   **Theming:**
+
+    *   The app’s look and feel remain consistent across all interfaces by utilizing Apple’s San Francisco typeface and system color palettes.
+    *   **Style:** Modern, minimalist, and flat; with subtle glassmorphism effects especially in translucent overlays and card views.
+
+*   **Color Palette:**
+
+    *   **Primary Color:** A subtle shade of blue or green (used for actionable items and highlights).
+    *   **Background Colors:** White or light grey to maintain a clean and uncluttered interface.
+    *   **Accent Colors:** Used sparingly to draw attention to important notifications, tips, or interactive elements.
+
+*   **Fonts:**
+
+    *   The San Francisco typeface is used throughout the app, ensuring consistency with iOS design guidelines.
+
+## Component Structure
+
+Keepin’s user interface is broken down into reusable and modular components.
+
+*   **Component-Based Architecture:**
+
+    *   Each feature (e.g., Swipe Manager, History View, Analytics Dashboard) is built as a self-contained component. This approach improves code reusability and simplifies maintenance.
+    *   Components communicate through well-defined interfaces and SwiftUI’s binding mechanisms (e.g., @Binding, @State, and ObservableObject), ensuring that data flows seamlessly.
+
+*   **Organization:**
+
+    *   Components are grouped based on their usage – for instance, dashboard components, navigation components, and device-specific features such as those for Apple Watch and Vision Pro.
+    *   A clear folder structure in Xcode, following best practices, allows developers to quickly locate and update code segments.
+
+## State Management
+
+Efficient state management is key to ensuring that Keepin delivers a smooth user experience across complex interactions.
+
+*   **Approach:**
+
+    *   SwiftUI’s state-driven paradigm is utilized using properties like @State for local view data, @ObservedObject for shared state data across views, and @EnvironmentObject for app-wide state.
+    *   This centralized approach ensures that updates in one part of the app immediately reflect wherever the data is displayed.
+
+*   **Sharing Data Across Components:**
+
+    *   The app leverages the use of ObservableObject models to maintain consistency and reduce bugs by ensuring a single source of truth for data such as photo management actions, analytics, and user settings.
+
+## Routing and Navigation
+
+Navigation in Keepin is handled using SwiftUI’s navigation tools, ensuring that users can seamlessly move between different parts of the app.
+
+*   **Navigation Structure:**
+
+    *   A clean and intuitive NavigationView is the basis for screen transitions. For example, the main dashboard, interactive photo management screens, and detailed analytics pages are all nested within this navigation structure.
+    *   NavigationLink is used to transition between views such as going from the Overview Dashboard to detailed History or Memory Vault screens.
+
+*   **Routing Concepts:**
+
+    *   While iOS apps do not follow traditional URL routing, the navigation logic ensures that users can easily move back and forth through the app using familiar swipe gestures and button taps.
+
+## Performance Optimization
+
+Keeping performance high is a top priority for delivering a seamless user experience.
+
+*   **Optimizations Implemented:**
+
+    *   **Lazy Loading & Code Splitting:** SwiftUI views initialize only when needed to minimize memory usage.
+    *   **Background Processing:** Long-running tasks like automated photo tagging using Core ML are scheduled with iOS background tasks to ensure they do not interfere with the user interface.
+    *   **Asset Optimization:** Use of optimized image assets, compression techniques, and system-level caching ensures the app remains snappy despite handling large photo libraries.
+
+*   **Impact on User Experience:**
+
+    *   These techniques collectively ensure that the app remains responsive, crashes are minimized, and battery usage is optimized by scheduling resource-intensive tasks wisely (e.g., when the device is charging or idle).
+
+## Testing and Quality Assurance
+
+Maintaining code quality and a bug-free experience is crucial in a project like Keepin.
+
+*   **Testing Strategies:**
+
+    *   **Unit Tests:** Testing individual components and view models to ensure business logic works as expected.
+    *   **Integration Tests:** Ensuring that the interaction between multiple components (e.g., the transition from the dashboard to detail screens) is smooth and reliable.
+    *   **End-to-End Tests:** Simulated user interactions across the entire flow, especially within critical features like Swiping to Delete, Memory Vault encryption, and Git-like History Management.
+
+*   **Tools & Frameworks:**
+
+    *   Xcode’s testing framework is used for unit and integration testing.
+    *   Automated UI testing tools provided by Xcode help in verifying the usability and layout on different devices.
+
+## Conclusion and Overall Frontend Summary
+
+Keepin’s frontend is designed to be modern, efficient, and user-friendly. The guidelines outlined in this document show how the project is architected using SwiftUI, organized around modular components, and optimized for performance and scalability. The design principles prioritize usability, accessibility, and a clean, minimalist aesthetic that resonates with Apple’s ecosystem.
+
+Unique aspects such as swipe-based interactions, integrated ML for background tagging, and cross-device compatibility (including support for Apple Watch and Vision Pro) ensure that Keepin stands out as an innovative photo management app with a secure and enjoyable user experience. With thorough testing and a focus on performance, this guideline helps maintain consistency and quality as the project evolves.
+
+By following these guidelines, all team members will have a clear understanding of the frontend architecture and design approach behind Keepin, ensuring that the development process is cohesive, maintainable, and aligned with the project goals.

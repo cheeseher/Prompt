@@ -1,0 +1,176 @@
+---
+description: Apply these rules when making changes to the project
+globs:
+alwaysApply: true
+---
+
+Update this rule if user requested changes to the project requirement, etc.
+# Backend Structure Document for Keepin
+
+This document explains the backend structure of Keepin—a photo management app for iOS that emphasizes privacy by keeping AI processing offline—using straightforward language. It covers everything from the architecture to hosting and maintenance.
+
+## Backend Architecture
+
+*   **Design Overview:**
+
+    *   The backend is designed around a clear separation of concerns. Core components such as analytics, Git-like history, commit logs, and metadata management are handled via RESTful APIs that interface with both a cloud database and iCloud.
+    *   The design uses common patterns (like Model-View-Controller) to keep the code organized, enhancing **maintainability** and **scalability**.
+
+*   **Key Frameworks and Patterns:**
+
+    *   **Frameworks & Languages:**
+
+        *   Node.js with Express (or a similar lightweight server framework) for API endpoints
+        *   PostgreSQL for structured data storage (commit logs, analytics) and CloudKit (or iCloud APIs) to handle synchronization with iCloud for photo archives
+
+    *   **Benefits:**
+
+        *   Scalability: Easily adds new endpoints and services as the app grows
+        *   Maintainability: Modularity allows individual components to be updated independently
+        *   Performance: Offline AI processing reduces backend load while APIs only handle metadata and analytics
+
+## Database Management
+
+*   **Technologies Used:**
+
+    *   **SQL Database:** PostgreSQL is used for handling structured data such as user profiles, commit logs, and trend analytics.
+    *   **NoSQL/Cloud Storage:** CloudKit (integrated with iCloud) stores non-relational data like encrypted photo archives in the Memory Vault.
+
+*   **Data Structures and Management Practices:**
+
+    *   Data related to user activity and history is structured in tables with clear relationships. This ensures quick access and reliable reporting.
+    *   Routine backups and replication strategies are in place to keep data safe, and all communications with the database are secured with encryption at rest and in transit.
+
+## Database Schema
+
+### Human-Readable Overview
+
+*   **User Table:**
+
+    *   Contains details about the app users, linked via Apple ID
+    *   Fields include: Unique User ID, Apple ID, creation date, and localization preferences
+
+*   **Commit Log Table:**
+
+    *   Tracks every photo management action (like swipe to delete or archive) in a Git-like fashion
+    *   Fields include: Commit ID, reference to the User ID, related Photo ID, action type (delete, tag, archive, revert), description, and timestamp
+
+*   **Trend Analytics Table:**
+
+    *   Stores daily summaries on user photo management trends
+    *   Fields include: Analytics ID, User ID, date, count of actions (e.g., items pending sorting), and other statistical insights
+
+*   **Photo Metadata Table:**
+
+    *   Records details about each photo (such as location, date taken, and tags)
+    *   Fields include: Metadata ID, User ID, Photo ID, list of tags, geolocation data, and timestamp
+
+### Example SQL Schema (PostgreSQL)
+
+-- Users table CREATE TABLE users ( user_id SERIAL PRIMARY KEY, apple_id VARCHAR(255) UNIQUE NOT NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, locale VARCHAR(50) );
+
+-- Commit logs table CREATE TABLE commit_logs ( commit_id SERIAL PRIMARY KEY, user_id INT REFERENCES users(user_id), photo_id VARCHAR(255), action_type VARCHAR(50), description TEXT, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP );
+
+-- Trend analytics table CREATE TABLE trend_analytics ( analytics_id SERIAL PRIMARY KEY, user_id INT REFERENCES users(user_id), analytics_date DATE, to_be_sorted_count INT, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP );
+
+-- Photo metadata table CREATE TABLE photo_metadata ( metadata_id SERIAL PRIMARY KEY, user_id INT REFERENCES users(user_id), photo_id VARCHAR(255), tags TEXT, location VARCHAR(255), captured_at TIMESTAMP );
+
+## API Design and Endpoints
+
+*   **Design Approach:**
+
+    *   We use a RESTful API design where endpoints are clearly defined to allow communication between the backend and the iOS app.
+    *   JSON is used as the common data format for communication.
+
+*   **Key Endpoints:**
+
+    *   **Authentication Endpoint:**
+
+        *   Purpose: Validate Sign in with Apple tokens and ensure secure access to the app.
+        *   Example Endpoint: `/api/auth/login`
+
+    *   **Commit Logs Endpoint:**
+
+        *   Purpose: Record all photo management actions such as deletions, archiving, and tag edits.
+        *   Example Endpoints: `/api/commits/new`, `/api/commits/history`
+
+    *   **Analytics Endpoint:**
+
+        *   Purpose: Retrieve user activity statistics and trends for the dashboard view.
+        *   Example Endpoint: `/api/analytics/daily`
+
+    *   **Photo Metadata Endpoint:**
+
+        *   Purpose: Manage photo metadata, including tags and geolocation data.
+        *   Example Endpoints: `/api/photos/metadata`, `/api/photos/update`
+
+## Hosting Solutions
+
+*   **Primary Hosting Environment:**
+
+    *   The backend is hosted on a cloud provider to guarantee high availability and scalability. Options include Amazon Web Services (AWS), Microsoft Azure, or Google Cloud Platform.
+
+*   **Hosting Benefits:**
+
+    *   **Reliability:** Cloud services ensure uptime and provide robust disaster recovery plans.
+    *   **Scalability:** Resources can be scaled on-demand to handle fluctuating loads, especially during high-usage periods.
+    *   **Cost-Effectiveness:** With pay-as-you-go models, the project only pays for the resources it consumes.
+
+## Infrastructure Components
+
+*   **Load Balancer:**
+
+    *   A load balancer (e.g., AWS Elastic Load Balancer) distributes incoming API requests evenly, preventing any single server from becoming a bottleneck.
+
+*   **Caching Mechanism:**
+
+    *   A caching solution (such as Redis) is implemented to store frequently accessed data, reducing database load and speeding up responses.
+
+*   **Content Delivery Network (CDN):**
+
+    *   A CDN (like AWS CloudFront) delivers static assets quickly to users, greatly enhancing UI experience especially for device-specific features like immersive AR in Vision Pro.
+
+*   **Serverless Functions:**
+
+    *   For tasks such as periodic trend analytics computation, serverless functions (AWS Lambda or equivalents) are employed to process data on-demand without needing a full-time server instance.
+
+## Security Measures
+
+*   **Authentication and Authorization:**
+
+    *   **Sign in with Apple** is used to provide secure and user-friendly authentication.
+    *   Endpoints validate Apple-issued tokens to ensure that only authorized users can access or modify data.
+
+*   **Data Encryption:**
+
+    *   **In Transit:** All data transmitted between the app and the backend is encrypted via HTTPS.
+    *   **At Rest:** Data stored in databases and on iCloud is secured, with AES-256 encryption specifically used for the Memory Vault archives.
+
+*   **Additional Measures:**
+
+    *   Regular security audits, use of JWT tokens, and strict access controls are implemented to further protect user data and maintain regulatory compliance.
+
+## Monitoring and Maintenance
+
+*   **Monitoring Tools:**
+
+    *   Tools such as AWS CloudWatch, Datadog, or similar solutions are used to monitor system performance, track API response times, and flag potential issues.
+
+*   **Maintenance Strategies:**
+
+    *   Regular updates and patches are scheduled to keep all components—both server-side and cloud functions—up to date.
+    *   Automated alerts are set up to notify the team of unusual activity or system errors, ensuring prompt responses to issues.
+
+## Conclusion and Overall Backend Summary
+
+*   **Recap:**
+
+    *   The backend of Keepin is built to support a modern, user-centric iOS experience by integrating secure authentication, efficient data storage, and leak-proof encryption (AES-256) with seamless integration into Apple's ecosystem via iCloud.
+    *   The architecture, based on RESTful APIs and modular services, ensures scalability, reliability, and ease of future enhancement.
+
+*   **Unique Aspects:**
+
+    *   A hybrid storage strategy that leverages both cloud-hosted SQL databases and native iCloud storage for privacy-focused features.
+    *   Git-like history management that allows users to view and revert photo management actions, a feature that differentiates Keepin from other photo management apps.
+
+This clear and comprehensive backend setup supports the overall goals of the project by balancing user privacy, performance, and ease of future expansion.

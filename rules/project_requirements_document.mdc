@@ -1,0 +1,106 @@
+---
+description: Apply these rules when making changes to the project
+globs:
+alwaysApply: true
+---
+
+Update this rule if user requested changes to the project requirement, etc.
+# Project Requirements Document (PRD)
+
+## 1. Project Overview
+
+Keepin is a mobile application exclusively designed for iOS devices such as iPhones, iPads, Apple Watches, and Vision Pro, targeting both digital software enthusiasts and casual users. Its primary function is to enhance the user's experience in managing photo libraries by providing tools for sorting, tagging, and analyzing photo collections through an engaging and user-friendly interface. Utilizing offline machine learning and innovative features, Keepin focuses on secure and private management of photo libraries, encouraging users to declutter and organize their digital memories effectively.
+
+The application aims to solve common pain points related to photo management, such as cluttered storage and the cumbersome process of manually organizing large photo volumes. The key objectives include delivering a seamless user experience across iOS devices, implementing robust encryption for secure photo storage, providing insightful analytics on photo management, and facilitating effortless cross-device synchronization through Sign in with Apple. The success of Keepin will be evaluated based on user engagement, satisfaction, data security, and the efficacy of its on-device processing.
+
+## 2. In-Scope vs. Out-of-Scope
+
+**In-Scope:**
+
+*   Development of an iOS-exclusive app for iPhone, iPad, Apple Watch, and Vision Pro.
+
+*   Minimalist UI adhering to Apple’s design guidelines.
+
+*   Core features:
+
+    *   Swipe-to-delete for fast photo cleanup.
+    *   Encrypted photo storage in the Memory Vault.
+    *   Trend Analysis dashboard showing photo management metrics.
+    *   Git-like History Management recording all photo operations.
+    *   Automated tagging using Core ML, conducted offline.
+    *   Sign in with Apple for cross-device synchronization.
+    *   Localization for key languages (Chinese, English, Thai, Korean, Japanese, Spanish).
+
+**Out-of-Scope:**
+
+*   Development for non-iOS platforms (e.g., Android).
+*   Social sharing features.
+*   Advanced photo-editing tools outside basic tagging and organizing.
+*   Extensive API integrations beyond necessary ones for iCloud and authentication.
+
+## 3. User Flow
+
+Upon launching Keepin, users are met with a clean login screen encouraging Sign in with Apple for immediate entry while safeguarding user data privacy. Once authenticated, a brief onboarding guides users through key features like the intuitive swipe-to-delete, comprehensive archives with Memory Vault, and vibrant analytical dashboards. After setup, users select their preferred language, catering to a global audience from the start.
+
+Post-onboarding, users arrive at the Main Dashboard, the epicenter of activity showcasing metrics such as sorted photo counts and storage insights via dynamic trend charts. Quick access buttons lead to specific functions including "Swipe Manager" for immediate photo sorting, "History View" for revision of past actions, and "Statistics Page" for enhanced understanding of photo habits. Through their Apple Watch, users can receive real-time alerts and minimal tagging capabilities, while Vision Pro users experience an augmented gallery view, offering a novel, immersive sorting approach.
+
+## 4. Core Features
+
+*   **Swipe-to-Delete Interface**: Efficiently removes unwanted photos using a familiar swiping action.
+
+*   **Memory Vault**: Securely encrypts photos for safe storage with AES-256 encryption, synchronized via iCloud.
+
+*   **Trend Analysis Dashboard**: Offers insights into user photo management activities, including a 7-day trend view.
+
+*   **Git-like History Management**: Captures every change as a commit, enabling easy reversion of photo modifications.
+
+*   **Automated Photo Tagging**: Utilizes on-device Core ML for tagging photos in background, maintaining user privacy.
+
+*   **User Authentication & Sync**: Sign in with Apple ensures seamless, private user management across devices.
+
+*   **Device-Specific Enhancements**:
+
+    *   **Apple Watch**: Alerts and on-the-go tag management.
+    *   **Vision Pro**: Elevates photo interaction through AR-enhanced views.
+
+## 5. Tech Stack & Tools
+
+*   **Platform**: iOS (iPhone, iPad, Apple Watch, Vision Pro)
+
+*   **Frontend**: SwiftUI for modern, clean UI per Apple's design ethos.
+
+*   **Machine Learning**: Core ML and Vision frameworks for efficient, offline photo analysis.
+
+*   **Authentication and Cloud**: Sign in with Apple for authentication; iCloud for secure data storage and sync.
+
+*   **Encryption**: AES-256 standard for securing data in Memory Vault.
+
+*   **Development Environments**:
+
+    *   Xcode for app development.
+    *   Cursor and Claude models for AI-assisted coding improvements.
+
+## 6. Non-Functional Requirements
+
+*   **Performance**: UI interactions should execute within 200ms. Background ML tasks are optimized for minimal battery impact.
+*   **Security**: Utilizes best-practice encryption; all ML tasks process offline.
+*   **Usability**: Ensures intuitive navigation with a clean and modern design, adaptable to all iOS devices.
+*   **Compliance**: Adheres to Apple guidelines and international data privacy regulations.
+*   **Battery Utilization**: Leverages Background Tasks efficiently to optimize battery usage.
+
+## 7. Constraints & Assumptions
+
+*   **Platform Scope**: Limited to iOS development, assuming consistent Apple API support.
+*   **Processing Requirements**: Assumes sufficient device capability for offline ML without external server dependency.
+*   **Encryption Technology**: Relies on current AES-256 standards.
+*   **Localization**: Presumes availability of translation resources for major languages.
+
+## 8. Known Issues & Potential Pitfalls
+
+*   **Limited ML Power on Older Devices**: Tracking battery and processing efficiency can be challenging.
+*   **iOS Background Limitations**: Must navigate Apple's system constraints for background processing.
+*   **Data Sync Challenges**: Requires robust error handling to prevent sync issues.
+*   **UI Consistency Across Devices**: Requires rigorous testing to ensure a seamless experience.
+*   **History Management Expertise**: Complex implementation needs careful planning to avoid user confusion.
+
+This PRD serves as the foundational guideline for developing "Keepin," ensuring clarity and alignment across all subsequent technical and design documents.

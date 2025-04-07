@@ -1,0 +1,136 @@
+---
+description: Apply these rules when making changes to the project
+globs:
+alwaysApply: true
+---
+
+Update this rule if user requested changes to the project requirement, etc.
+## Project Overview
+
+*   **Type:** cursor_project_rules
+*   **Description:** Keepin is a mobile application designed for iOS devices—including iPhone, iPad, Apple Watch, and Vision Pro—aimed at helping digital software enthusiasts and regular users manage and organize their photo libraries in a fun and seamless way. Users can efficiently clean up, sort, tag, and analyze photo trends, enhancing their photo management satisfaction. The app emphasizes privacy with offline AI processing, a modern minimalist design aligned with Apple’s aesthetic, and robust cross-device synchronization using Sign in with Apple.
+*   **Primary Goal:** Enhance the user experience in managing photo libraries by offering intuitive swipe-to-delete interactions, secure encrypted storage in a Memory Vault, comprehensive trend analytics, Git-like history management for reversible actions, and automated on-device photo tagging using Core ML and Vision.
+
+## Project Structure
+
+### Framework-Specific Routing
+
+*   **Directory Rules:**
+
+    *   **Xcode & SwiftUI:** Use the native Xcode project structure with a clear separation of concerns. Adopt SwiftUI’s App lifecycle with the main entry point defined in the `@main` App file and clearly partitioned view files (e.g., `ContentView.swift`, `DashboardView.swift`, etc.).
+    *   Example 1: SwiftUI App lifecycle → `KeepinApp.swift` initiates the scene and manages navigation using SwiftUI’s `NavigationView` and `NavigationLink` patterns.
+    *   Example 2: Utilizing Sign in with Apple → Dedicated SwiftUI views for authentication such as `SignInView.swift` which integrates Apple’s secure sign-in components.
+
+### Core Directories
+
+*   **Versioned Structure:**
+
+    *   **Views:** Contains all SwiftUI view files (e.g., `DashboardView.swift`, `SwipeManagerView.swift`, `HistoryView.swift`).
+    *   **Models:** Holds data models representing photo metadata, user sessions, and analytics data.
+    *   **Services:** Encompasses modules for handling Core ML processing, iCloud synchronization, and AES-256 encryption routines.
+    *   Example 1: `Views/` → SwiftUI components using Apple's design language.
+    *   Example 2: `Services/CoreML/` → Core ML and Vision integration modules optimized for offline processing.
+
+### Key Files
+
+*   **Stack-Versioned Patterns:**
+
+    *   **KeepinApp.swift:** Defines the SwiftUI App lifecycle and routes to the main dashboard and authentication flows.
+    *   **ContentView.swift:** Acts as the primary view for onboarding and the home page (Main Dashboard).
+
+## Tech Stack Rules
+
+*   **Version Enforcement:**
+
+    *   **Xcode@14:** Ensure use of Xcode 14 or later to leverage the latest SwiftUI enhancements and iOS design paradigms.
+    *   **SwiftUI@Latest:** Adopt the newest SwiftUI patterns with MVVM architecture for modular code.
+    *   **Core ML & Vision:** Enforce the installation of current Apple Core ML libraries optimized for on-device processing.
+    *   **iOS SDK:** Projects must target iOS versions that support advanced features for iPhone, iPad, Apple Watch, and Vision Pro.
+
+## PRD Compliance
+
+*   **Non-Negotiable:**
+
+    *   "Keepin is a mobile application exclusively designed for iOS devices such as iPhones, iPads, Apple Watches, and Vision Pro..." – All implementations must strictly adhere to the iOS-only scope, ensuring that features like offline ML processing, secure Memory Vault encryption with AES-256, and Sign in with Apple authentication remain central to the app.
+
+## App Flow Integration
+
+*   **Stack-Aligned Flow:**
+
+    *   Example: SwiftUI Authentication Flow → The onboarding and sign-in views (e.g., `SignInView.swift`) seamlessly guide users from account creation via Sign in with Apple to the main dashboard. SwiftUI’s navigation and state management ensure a fluid transition from authentication to feature-rich interfaces like the swipe-to-delete and history management screens.
+
+## Best Practices
+
+*   **ios**
+
+    *   Adhere to Apple’s Human Interface Guidelines to ensure consistency across devices.
+    *   Optimize for various screen sizes and input modalities (touch, watch interactions, AR gestures).
+    *   Regularly test on multiple iOS devices including iPhone, iPad, Apple Watch, and Vision Pro.
+
+*   **swiftui**
+
+    *   Use MVVM architecture to keep code modular and maintainable.
+    *   Leverage SwiftUI previews for rapid UI testing.
+    *   Ensure state management is efficient and declarative.
+
+*   **core_ml**
+
+    *   Optimize ML models for on-device performance to minimize battery impact.
+    *   Validate models rigorously under offline conditions.
+    *   Ensure that ML tasks are scheduled during optimal processing times, such as when the device is charging.
+
+*   **vision**
+
+    *   Utilize GPU acceleration for image processing where available.
+    *   Maintain real-time responsiveness in visual tagging.
+    *   Integrate seamlessly with Core ML for enhanced data analysis.
+
+*   **sign_in_with_apple**
+
+    *   Ensure secure token exchanges and error management.
+    *   Provide clear user feedback during authentication processes.
+    *   Seamlessly integrate with the app’s onboarding flow.
+
+*   **icloud**
+
+    *   Implement robust error handling for data synchronization.
+    *   Provide both automatic and manual backup options with user control.
+    *   Ensure data integrity and secure transmission.
+
+*   **aes_256**
+
+    *   Use Apple’s native encryption libraries to implement AES-256.
+    *   Protect encryption keys using secure storage (e.g., Keychain, Secure Enclave).
+    *   Regularly update encryption methodologies to align with industry standards.
+
+*   **ipad os**
+
+    *   Design adaptive layouts to take advantage of larger screens.
+    *   Use split-view and popover interfaces to optimize user experience.
+    *   Test interactions extensively on both portrait and landscape orientations.
+
+*   **apple watch os**
+
+    *   Prioritize glanceable, concise information delivery.
+    *   Optimize for battery life by minimizing background tasks and expensive computations.
+    *   Create intuitive interactions that require minimal user input.
+
+*   **mac os**
+
+    *   Where applicable, adapt interfaces for macOS conventions if shared code exists.
+    *   Optimize for keyboard and trackpad interactions.
+    *   Ensure consistency with Apple’s design ethos across all platforms.
+
+*   **vision os**
+
+    *   Design immersive and interactive AR experiences.
+    *   Optimize performance for real-time augmented reality rendering.
+    *   Follow AR-specific guidelines to ensure user comfort and clarity.
+
+## Rules
+
+*   Derive folder/file patterns directly from the tech stack documentation and adhere to Xcode’s structure for SwiftUI projects.
+*   For SwiftUI apps, enforce the use of a clear separation between Views, Models, and Services. Ensure that the `@main` App file initializes the correct scene and routing logic.
+*   Avoid mixing architectural patterns; for example, do not mix traditional UIKit view controllers with SwiftUI views unless absolutely necessary and well-documented.
+*   Ensure that all version-dependent conventions (e.g., usage of current SwiftUI and Xcode versions) are strictly followed throughout the project.
+*   Maintain rigorous adherence to Apple’s Human Interface Guidelines in UI/UX design and user journey implementations.

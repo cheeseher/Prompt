@@ -1,0 +1,56 @@
+---
+description: Apply these rules when making changes to the project
+globs:
+alwaysApply: true
+---
+
+Update this rule if user requested changes to the project requirement, etc.
+# Implementation plan
+
+## Phase 1: Environment Setup
+
+1.  **Prevalidation**: Check if the current directory already contains a Keepin project by looking for an existing Xcode project file (e.g., a *.xcodeproj file). If found, skip initialization steps. *(Project Overview: App Name, Target Users)*
+2.  **Initialize Project in Xcode**: Open Xcode and create a new project named "Keepin". Choose the iOS App template with Swift as the language and SwiftUI as the interface. *(Project Overview: Platform, Frontend: SwiftUI)*
+3.  **Configure Device Targets**: In the project settings, ensure the deployment targets cover iPhone, iPad, Apple Watch, and Vision Pro. *(Project Overview: Device-Specific Features)*
+4.  **Set Up iCloud Capability**: Enable iCloud in the project settings and configure it for encrypted photo archives. Remind the user to set up the proper iCloud entitlements. *(Core Features: Memory Vault, iCloud Sync)*
+5.  **Integrate Sign in with Apple**: Enable the Sign in with Apple capability in your Xcode project for secure authentication. *(Core Features: User Authentication)*
+6.  **Install Dependencies for ML**: Confirm that Core ML and Vision frameworks are part of the project. No extra installation is needed since these are provided by Apple, but note their integration for offline photo tagging. *(Core Features: Automated Photo Tagging)*
+7.  **Validation**: Verify that the project builds in Xcode with no errors by running a build (Cmd+B).
+
+## Phase 2: Frontend Development
+
+1.  **Setup Main UI Navigation**: Create a SwiftUI view (e.g., `ContentView.swift`) that acts as the entry point. Implement a NavigationView that will route to different functional screens (Onboarding, Dashboard, Swipe Manager, Memory Vault, etc.). *(App Structure/Flow: Onboarding, Main Dashboard)*
+2.  **Design Onboarding Screen**: Build an OnboardingView that includes Sign in with Apple button and a brief overview of app features. Use Apple’s system UI components and system font (San Francisco) to maintain a minimalist design. *(App Structure/Flow: Onboarding, Additional Requirements: Design)*
+3.  **Develop Main Dashboard**: Create a DashboardView that displays the photo management analytics, commit history previews, and a 7-day photo management trend chart. Use SwiftUI charts if available. *(App Structure/Flow: Main Dashboard, Trend Analysis)*
+4.  **Implement Swipe Manager Interface**: Create SwipeManagerView using a Tinder-like card swipe mechanism for quick photo deletion. *(Core Features: Swipe to Delete)*
+5.  **Build Memory Vault UI**: Develop MemoryVaultView for accessing and managing encrypted photo archives. Integrate UI prompts for iCloud sync (automatic/manual) options. *(Core Features: Memory Vault, iCloud Sync)*
+6.  **Create History View**: Build HistoryView to display a timeline of photo management operations. Include timestamps, descriptions, thumbnail previews, and a styled "Revert" button for each commit. *(Core Features: Git-like History Management)*
+7.  **Develop Statistics Page**: Create StatisticsView for detailed analytics of photo organization trends. This view should include quick access modes like "All", "To be sorted", "Sorted", and "Categories". *(Core Features: Trend Analysis)*
+8.  **Localize the UI**: Add support for multiple languages (Chinese, English, Thai, Korean, Japanese, Spanish) using Xcode’s localization tools. *(Additional Requirements: Localization)*
+9.  **Implement Accessibility Features**: Ensure dynamic type, VoiceOver support, and proper accessibility labels throughout the UI. *(Additional Requirements: Accessibility)*
+10. **Validation**: Run the app in Xcode’s simulator(s) verifying that navigation between the views works correctly and UI components are rendered as per design.
+
+## Phase 3: Backend Development
+
+1.  **Setup Local Data Management**: Since Keepin processes data offline, integrate Core Data or local storage frameworks to manage the photo library and history commits securely. *(Core Features: Git-like History Management, App Structure/Flow: History View)*
+2.  **Implement AES-256 Encryption**: Develop a cryptographic utility (e.g., in a file named `EncryptionHelper.swift`) using CryptoKit to apply AES-256 encryption for the Memory Vault. Ensure encryption and decryption functions are provided for secure iCloud storage. *(Core Features: Memory Vault, Additional Requirements: Data Security)*
+3.  **Configure Core ML Integration**: Integrate Core ML models and utilize Vision framework in a dedicated manager (e.g., `TaggingManager.swift`) for automated offline photo tagging. *(Core Features: Automated Photo Tagging)*
+4.  **Schedule Background Tasks**: Use iOS Background Tasks and Background Fetch. Create background task handlers (e.g., in `BackgroundTaskManager.swift`) that schedule ML processing for photo tagging when the device is charging. *(Core Features: Automated Background Processing, Additional Requirements: Background task scheduling)*
+5.  **Validation**: Test the encryption functions in a sample unit test file (e.g., `EncryptionHelperTests.swift`) and confirm data integrity after encryption and decryption. Also, simulate a background task trigger in the simulator.
+
+## Phase 4: Integration
+
+1.  **Connect Onboarding with Authentication**: Link the OnboardingView’s Sign in with Apple button action to the authentication flow, ensuring any user session created is propagated throughout the app. *(App Structure/Flow: Onboarding)*
+2.  **Integrate UI with Data Layer**: Connect UI components (DashboardView, HistoryView, MemoryVaultView) to the corresponding data models and persistence layer. *(Core Features: Git-like History Management, Memory Vault)*
+3.  **Integrate Encryption with iCloud Sync**: Modify the MemoryVaultView so that when photos are archived or restored, the data is first encrypted/decrypted using the AES-256 utility before syncing with iCloud. *(Core Features: Memory Vault, Data Security)*
+4.  **Integrate Offline Tagging Flow**: Connect the background tagging process in TaggingManager.swift to update the local photo metadata and refresh UI components (e.g., the swipe manager and history view) with new tags. *(Core Features: Automated Photo Tagging, Swipe to Delete)*
+5.  **Validation**: Run an end-to-end flow in the simulator to sign in, perform a swipe-to-delete, trigger a background tagging task, and observe the encrypted photo archive update.
+
+## Phase 5: Deployment
+
+1.  **Prepare for App Store Submission**: Ensure the project adheres to Apple’s guidelines. Review entitlements, signing certificates, and app icon configurations in Xcode. *(Project Overview: Goal)*
+2.  **Perform Final Testing**: Run tests on physical devices across iOS, iPadOS, watchOS, and Vision Pro (if available) to validate performance, battery efficiency (for background tasks), and UI responsiveness. *(Key Considerations: Performance, User Experience)*
+3.  **Archive and Upload**: Archive the app through Xcode and upload it to App Store Connect. Ensure proper versioning and release notes are provided. *(Key Considerations: Scalability, Future Enhancements)*
+4.  **Validation**: After upload, perform TestFlight testing with a small group to verify the app’s functionality and gather early feedback before final App Store release.
+
+This step-by-step implementation plan uses the provided project documents as strict reference. Each step is linked with documentation details to ensure clear, traceable integration from concept to deployment.

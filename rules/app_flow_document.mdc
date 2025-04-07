@@ -1,0 +1,38 @@
+---
+description: Apply these rules when making changes to the project
+globs:
+alwaysApply: true
+---
+
+Update this rule if user requested changes to the project requirement, etc.
+# Keepin App Flow Document
+
+## Onboarding and Sign-In/Sign-Up
+
+When a brand-new user accesses the Keepin app on their iOS device, which could be an iPhone, iPad, Apple Watch, or Vision Pro, they are greeted by a sleek and intuitive landing screen. This screen effectively communicates the app’s purpose of simplifying photo management while maintaining a strong emphasis on user privacy. The app’s primary authentication method is Sign in with Apple, which facilitates a fast, secure, and seamless process for both creating a new account and logging in for existing users. For those who favor alternative methods, subtle cues suggest other social login options while maintaining a primary focus on simplicity and security. In the event that a user forgets their password, a straightforward recovery workflow assists them through identity verification and secure password reset, all within the secure confines of the Apple ecosystem. Once account access is granted, new users receive concise onboarding tips, familiarizing them with core functionalities such as the swipe-to-delete feature, memory vault, automated tagging, and historic photo management. These tips ensure users feel at ease and proficient navigating the app right from the get-go.
+
+## Main Dashboard or Home Page
+
+Upon successful sign-in, users land on the main dashboard, a thoughtfully crafted hub that integrates the aesthetic appeal of Apple’s design language with robust functionality. The home page offers an overview of photo management activities through real-time analytics paired with quick access controls. Key sections like “All,” “To be sorted,” “Sorted,” “Categories,” and an entry to the Trash Bin are clearly visible to simplify navigation. The Trash Bin serves as a temporary holding area for photos deleted by the user, and they remain there until permanently discarded, adding an additional layer of security against accidental deletions. Users can conveniently restore photos from the Trash Bin before final deletion. A 7-day trend chart is also present, giving users a visual summary of items that need sorting. The intuitive design enables users to effortlessly navigate from the analytics dashboard to more specialized modules with simple gestures or taps.
+
+## Detailed Feature Flows and Page Transitions
+
+As users delve deeper into app functions, they naturally explore various modules according to their needs. For those wishing to rapidly clean up their photo libraries, the Swipe Manager module presents photos as interactive cards, allowing users to quickly dispose of unwanted images through a Tinder-like swipe gesture. This interface not only updates the photo library in real-time but also records each operation in the app’s Git-like history system. Actions such as deletions or tagging adjustments are logged with detailed commit-like checkpoints, providing timestamps, summaries, and thumbnail previews for clarity and context. Users can access this history view anytime, enabling smooth scroll through past changes and easy reversion to previous states via the revert option.
+
+In the Memory Vault section, cherished photos are safely compressed into encrypted archives using AES-256 encryption. Users can choose between automatic iCloud syncing or manual backup options, thus giving them full control over their data's security and backup timing. Transitioning back to the main dashboard from any section is fluid, minimizing workplace disruption.
+
+The app capitalizes on the Core ML and Vision frameworks to tag photos automatically during device idle times, particularly during sleep mode. This background process utilizes iOS background tasks to ensure energy efficiency and performance optimization. Once tagging is complete, users can review, edit, and manage tags through a dedicated interface, ensuring metadata accuracy without constant manual input.
+
+For device-specific features, the Apple Watch version provides quick notifications and simple tagging capabilities directly from the wrist, enabling management on the go. On the Vision Pro, users enjoy an immersive gallery in an augmented reality setting, which enriches sorting and tagging through an engaging and interactive experience.
+
+## Settings and Account Management
+
+Users access a comprehensive settings interface where they can manage personal information, update preferences, and adjust notifications. Synchronization settings control how encrypted Memory Vault archives interact with iCloud, allowing selections for automatic or manual syncing. Advanced options include adjustments for background processing, letting users disable or enable automatic tagging to conserve battery life. Seamless integration with profile settings ensures any adjustments reflect immediately across the app. Users can smoothly transition back to the main dashboard or other modules after managing settings, maintaining an uninterrupted user experience.
+
+## Error States and Alternate Paths
+
+The Keepin app is equipped with robust error states to ensure continuity in the user journey, even during unforeseen interruptions. Invalid input during signup or settings updates trigger clear error messages with guidance for rectification. In instances of connectivity issues—such as iCloud syncing interruptions—in-app alerts inform users to check their connections. Offline fallback mechanisms maintain core functionalities like viewing photo history or local library browsing, regardless of connectivity. Restricted action attempts—like unauthorized reverts—prompt contextual warnings to mitigate accidental data loss. These alternate paths and error recoveries solidify the user’s ability to resume their journey with confidence and minimal disruption.
+
+## Conclusion and Overall App Journey
+
+The Keepin app offers a comprehensive and seamless platform for photo management across Apple devices, beginning with a streamlined onboarding process facilitated by Sign in with Apple. Users quickly transition to a dynamic dashboard that merges analytical insights with straightforward navigation to key features. Whether through the intuitive swipe-to-delete action, detailed analytics, secure Memory Vault backup, or immersive experiences on Vision Pro, the entire app is engineered to deliver a connected and fluid experience. Designed with a minimalist aesthetic and robust error handling, the app caters to a broad audience, ensuring engaging and efficient photo library management for both digital enthusiasts and casual users alike. The user’s journey, from sign-up through daily leadership, is consistently intuitive and secure, making photo organization enjoyable and comprehensive.

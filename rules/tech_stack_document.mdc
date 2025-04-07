@@ -1,0 +1,87 @@
+---
+description: Apply these rules when making changes to the project
+globs:
+alwaysApply: true
+---
+
+Update this rule if user requested changes to the project requirement, etc.
+# Keepin Tech Stack Document
+
+This document breaks down the technology choices for the Keepin app, ensuring that even if you’re not a tech expert, you’ll understand how every part of the system works together to deliver a smooth, secure, and enjoyable photo management experience on your Apple devices.
+
+## Frontend Technologies
+
+Keepin’s user interface is built with technologies that make it modern, intuitive, and perfectly adapted to iPhones, iPads, Apple Watches, and Vision Pro devices. Here’s what is used:
+
+*   **SwiftUI**: This framework from Apple is employed to create the app’s clean and minimalist look. It makes the interface responsive and visually appealing.
+*   **Apple’s System UI Components**: By using system fonts (like the San Francisco typeface) and design elements such as blur effects, the app aligns with Apple's design standards ensuring a familiar feel for users.
+
+These choices enhance user experience by providing a consistent, smooth, and visually engaging interface across all iOS devices.
+
+## Backend Technologies
+
+Even though Keepin is primarily an iOS application, its backend elements ensure the app runs seamlessly and securely, handling everything from data storage to offline processing.
+
+*   **Core ML and Vision Frameworks**: These are integrated on the device itself to analyze and tag photos using machine learning. All processing happens offline to maintain user privacy.
+*   **Sign in with Apple**: This is the go-to method for user authentication. It guarantees a secure and user-friendly sign-in and account management experience.
+*   **iCloud Integration**: Used for automatically syncing data such as encrypted photo archives, ensuring that users have a reliable backup and the ability to access their memories across devices.
+*   **AES-256 Encryption**: This robust encryption standard secures photos stored in the Memory Vault, giving peace of mind that your data is safe.
+
+These components work in harmony to manage data efficiently, ensure smooth operations, and protect your personal information.
+
+## Infrastructure and Deployment
+
+Even though Keepin operates on iOS, providing a robust foundation for deployment and continuous improvement is key to a great user experience.
+
+*   **Xcode**: Apple’s official development environment is used for coding, testing, and debugging the app. It streamlines development specifically for iOS devices.
+*   **Version Control Systems**: Integrated within our development tools for tracking changes in the app, mirroring the Git-like commit history that the app itself showcases to users.
+*   **Continuous Integration & Deployment (CI/CD) Pipelines**: These ensure that updates are tested for quality before being released. They help the development team roll out new features or fixes quickly and reliably.
+
+These infrastructure choices contribute to the project’s overall reliability, scalability, and ease of deployment across various Apple devices.
+
+## Third-Party Integrations
+
+Keepin smartly incorporates external tools and services to enhance its core functionalities:
+
+*   **Sign in with Apple**: Beyond primary authentication, it simplifies the login process and secures user data using Apple’s trusted system.
+
+*   **iCloud**: Acts as a seamless storage solution for encrypted photo archives and user data synchronization across iOS devices.
+
+*   **Additional Development Tools**:
+
+    *   **Cursor**: A sophisticated IDE providing real-time suggestions that support coding, especially useful for our AI-powered components.
+    *   **Claude 3.7 and Claude 3.5 Sonnet**: These assist in intelligent code completions and improvements, underpinning a smoother development process.
+
+These integrations ensure that the app enhances functionality without compromising on security or performance.
+
+## Security and Performance Considerations
+
+Keeping your photos safe and your experience swift is at the heart of Keepin’s design:
+
+*   **Security Measures**:
+
+    *   **AES-256 Encryption**: Securely protects the Memory Vault’s data, making sure that important photos are stored securely.
+    *   **Local, Offline Processing for ML Tasks**: By using Core ML and Vision directly on the device, we ensure that personal data never leaves your phone, preserving privacy.
+    *   **Sign in with Apple**: Offers a secure authentication method that minimizes risks associated with third-party credentials.
+
+*   **Performance Optimizations**:
+
+    *   **SwiftUI’s Efficiency**: Provides a responsive user interface that keeps interactions smooth and fluid.
+    *   **Background Task Scheduling**: Using iOS's Background Tasks, the app efficiently handles ML processing (like automated tagging) during sleep mode, carefully managing battery life.
+    *   **Optimized ML Models**: The Core ML models are pre-optimized to ensure fast and energy-efficient performance during intensive tasks.
+
+These measures ensure that users experience both high performance and strong data protection.
+
+## Conclusion and Overall Tech Stack Summary
+
+In summary, the technology choices made for Keepin are carefully selected to align with the app’s goals of providing a secure, engaging, and user-friendly experience on iOS devices:
+
+*   **Frontend Technologies**: SwiftUI and Apple’s native design components bring a modern and intuitive user interface across all supported devices.
+*   **Backend Technologies**: Core ML, Vision, Sign in with Apple, iCloud, and AES-256 encryption work in concert to manage data securely and efficiently.
+*   **Infrastructure and Deployment**: Xcode, CI/CD pipelines, and robust version control ensure a high-quality and consistent app delivery.
+*   **Third-Party Integrations**: Integrations with reliable services like Sign in with Apple and iCloud, as well as development tools like Cursor and Claude models, further strengthen the app’s overall performance.
+*   **Security and Performance Considerations**: Local ML processing, strong encryption, and energy-optimized background tasks maintain both security and performance.
+
+By combining these technologies, Keepin offers secure offline processing for sensitive data, smooth navigation and interaction across multiple iOS devices, and future-proof architecture that’s ready to embrace further enhancements. This well-rounded tech stack not only meets the current needs of photo management but is also designed to adapt as user needs evolve over time.
+
+Thank you for reading this breakdown, and we hope it provides a clear insight into the thoughtful technology choices behind Keepin.
